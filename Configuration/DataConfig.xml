@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Environment>
+
+    <!-- Timeout -->
+    <TimeOut>2</TimeOut>
+
+    <!-- general -->
+   <!-- <PlatformName>web</PlatformName>  web/mobile/server/desktop -->
+
+
+    <!-- mobile -->
+    <UDID>R58N10P12AW</UDID>
+    <AppiumServer>http://localhost:4723/wd/hub</AppiumServer>
+
+    -----Menora_HW-----
+    <MenoraHW_APPPackage>com.menora_myway</MenoraHW_APPPackage>
+    <MenoraHW_APPActivity>.MainActivity</MenoraHW_APPActivity>
+
+
+    <!--> API URLs (url should end with / ) -->
+    <API_BASE>http://localhost:3000/</API_BASE>
+    <API_GET>api/teams/search?query=</API_GET>
+    <API_POST>api/teams</API_POST>
+    <API_PUT>api/teams</API_PUT>
+    <API_DELETE>/api/teams/</API_DELETE>
+    <API_USERNAME>admin</API_USERNAME>
+    <API_PASSWORD>admin123</API_PASSWORD>
+
+    <!--> db -->
+    <db_URL>jdbc:mysql://remotemysql.com:3306/1vhfrL33Wp</db_URL>   <!--> jdbc:mysql://<server url>:<port>/<databasename> -->
+    <db_User>1vhfrL33Wp</db_User>
+    <db_Pass>XXASkuxAiE</db_Pass>
+
+    <!-->  data driven testing -->
+    <DDTFile>.\DDTFiles\users.csv</DDTFile>
+
+</Environment>
+
+

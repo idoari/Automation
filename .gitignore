@@ -1,0 +1,6 @@
+/.idea
+/target
+/allure-results
+/test-recordings
+/imageRepository
+jenkins.war

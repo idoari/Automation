@@ -1,0 +1,12 @@
+here is a list of the supported project's platforms.
+
+=== Mobile === 
+An andriod phone must be connected to the usb port.
+
+=== Jenkins ===
+To initialize the Jenkins server use this commends:
+Go to war file dir
+java -jar jenkins.war --httpPort=9090
+
+
+

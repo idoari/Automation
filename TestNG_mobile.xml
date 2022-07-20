@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite parallel="false" name="Mobile suite">
+    <test name="Mobile Tests">
+        <parameter name="PlatformName" value="mobile" />
+    <!--
+           <packages>
+               <package name = "sanity"></package>
+           </packages>
+           <classes>
+           -->
+    <classes>
+    <class name="sanity.test"/>
+    <!--
+           <methods>
+               <include name = "test_mobile.*"/>  //run every test that starts with the word test_mobile
+               <include name = "test01_verifyHeader"/>   tag that doesn't include content can end with
+               <exclude name = "test02_checkRequiredField_AddNewUser"/>
+           </methods>
+
+           @Test(dependsOnMethods= ("name of methods that runs before this test"))
+           public static void idoi() {}
+
+           @Test(enabled= false) //testNG skip this test - if this feature is not working for example
+           public static void idoi() {}
+
+           @Test(timeOut= 4000) //if this test running too long fail only this test and keep running
+           public static void idoi() {}
+
+           //inside the suite you can put listeners
+           <listeners> <listener name = package.class name /> <listeners>
+   -->
+</classes>
+</test>
+</suite>
+
+
+
