@@ -40,6 +40,7 @@ public class Base {
     protected static RequestSpecification httpRequest;
     protected static Response response;
     protected static JSONObject params = new JSONObject();
+
     protected static JsonPath jp;
 
 
