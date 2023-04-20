@@ -7,10 +7,20 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
 import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import io.restassured.RestAssured;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.*;
+import org.sikuli.script.Screen;
+import org.testng.asserts.SoftAssert;
+import workflows.MobileFlows;
 import java.io.*;
 import java.lang.reflect.Method;
 import java.net.ServerSocket;
@@ -38,7 +48,7 @@ public class CommonOps extends Base {
         //config file
         prop = new Properties();
         prop.load(new FileInputStream(System.getProperty("user.dir") + "/Configuration/config.properties" ));
-
+		MobileFlows.ReadAccounts(); //read from file the id and phone numbers for the accounts todo:replace with db
     }
 /*
     @AfterClass
@@ -62,9 +72,48 @@ public class CommonOps extends Base {
     }
 
     private static void initAPI() {
-        RestAssured.baseURI = "https://jokes.p.rapidapi.com/jod/test";
-        httpRequest = RestAssured.given();
+        //RestAssured.baseURI = getData("API_BASE");
+        //httpRequest = RestAssured.given().auth().preemptive().basic(getData("API_USERNAME"),getData("API_PASSWORD"));
     }
+
+
+    public static void initBrowser (String browserType) {
+        if (browserType.equalsIgnoreCase("chrome"))
+            driver = initChromeDriver() ;
+        else if (browserType.equalsIgnoreCase("firefox"))
+            driver = initFirefoxDriver() ;
+        else if (browserType.equalsIgnoreCase("ie"))
+            driver = initIEDriver() ;
+        else
+            throw new RuntimeException("invalid browser type");
+
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        wait = new WebDriverWait(driver,2);
+        driver.get("https://friends.walla.co.il/login");
+        //ManagePages.initOranageHRM(); //initialize the page objected with pagefactory
+        action = new Actions(driver);
+
+    }
+
+    public static WebDriver initChromeDriver() {
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        return driver;
+    }
+
+    public static WebDriver initFirefoxDriver() {
+        WebDriverManager.firefoxdriver().setup();
+        WebDriver driver = new FirefoxDriver();
+        return driver;
+    }
+
+    public static WebDriver initIEDriver() {
+        WebDriverManager.iedriver().setup();
+        WebDriver driver = new InternetExplorerDriver();
+        return driver;
+    }
+
 
     public static AndroidDriver initMobileAndroid(int port) { //compatible with native, hybrid and mobile browser testing
         //when you run an emulator , defined emulator name as "emulator-X" to differentiate between real device and emulators
@@ -209,6 +258,9 @@ public class CommonOps extends Base {
 
     public static AppiumDriverLocalService startAppium(int port) throws IOException {
         killAppium(port); //kill all appium servers
+        //killProcess("port "+ port); //kill all appium servers
+        //killProcess("Android/sdk/"); //kill all appium servers
+        //illProcess("chromedriver");
         AppiumServiceBuilder builder = new AppiumServiceBuilder();
         builder.withArgument(() -> "--allow-insecure","chromedriver_autodownload");
         builder.withIPAddress("127.0.0.1").usingPort(port);

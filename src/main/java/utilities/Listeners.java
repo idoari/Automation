@@ -11,7 +11,7 @@ import java.io.File;
 
 
 
-public class Listeners extends Base implements ITestListener {
+public class Listeners extends CommonOps implements ITestListener {
 
     public void onStart(ITestContext test)
     {
@@ -38,7 +38,7 @@ public class Listeners extends Base implements ITestListener {
     {
         System.out.println("--------------------------------Starting Test: " + test.getName() + " ---------------");
         System.out.println("--------------------------------Saving Screenshot for : " + test.getName() + " ---------------");
-        MobileActions.takeScreenshot(test.getName());
+        //obileActions.takeScreenshot(test.getName()); //todo: retrieve screenshot
     }
 
 
@@ -72,7 +72,7 @@ public class Listeners extends Base implements ITestListener {
 
         System.out.println("--------------------------------Test: " + test.getName() + " failed---------------");
         if (!platform.equalsIgnoreCase("api")) { //api has no GUI
-            saveScreenshot();
+            //saveScreenshot(); //todo : return the screenshot
             //stop recording
 
             try {

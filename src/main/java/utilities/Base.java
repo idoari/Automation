@@ -8,6 +8,8 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import org.json.simple.JSONObject;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
 
@@ -21,6 +23,10 @@ public class Base {
     //protected static Screen screen;  //for sixuli graphical identifier
     protected static String platform ;
     protected static Properties prop; //for properites config file
+
+    //web
+    protected static WebDriver driver; //used by electron,winappdriver as well (electron is a web base app)
+    protected static Actions action ;
 
     //mobile
     public static AppiumDriver mobileDriver;

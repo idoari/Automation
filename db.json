@@ -1,9 +1,11 @@
 {
-  "posts": [
+  "users": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "first_name": "ido",
+      "last_name": "aricha",
+      "age": "34",
+      "salary": "50000"
     }
   ],
   "comments": [

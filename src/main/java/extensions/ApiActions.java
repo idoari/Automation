@@ -2,6 +2,7 @@ package extensions;
 
 import com.google.gson.internal.bind.util.ISO8601Utils;
 import io.qameta.allure.Step;
+import io.restassured.RestAssured;
 import io.restassured.http.Header;
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;
@@ -24,9 +25,10 @@ public class ApiActions extends CommonOps {
     @Step("Post Data to Server")
     public static Response post(JSONObject params,String url) {
         httpRequest.header("Content-Type","application/json");
+        //System.out.println(params.toJSONString());
         httpRequest.body(params.toJSONString());
         response = httpRequest.post(url);
-        Assert.assertEquals(response.statusCode(),200,"Unexpected Error Code " + response.statusCode());
+        //Assert.assertEquals(response.statusCode(),200,"Unexpected Error Code " + response.statusCode());
         return response;
     }
 

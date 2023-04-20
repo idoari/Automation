@@ -1,20 +1,25 @@
 package extensions;
 
 import com.google.common.util.concurrent.Uninterruptibles;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.connection.ConnectionStateBuilder;
 import io.appium.java_client.ios.IOSTouchAction;
+import io.appium.java_client.touch.WaitOptions;
 import io.qameta.allure.Step;
 import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.awt.*;
 import java.io.File;
+import java.net.InetAddress;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import static io.appium.java_client.touch.LongPressOptions.longPressOptions;
@@ -23,11 +28,16 @@ import static io.appium.java_client.touch.WaitOptions.waitOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
 import static io.appium.java_client.touch.offset.PointOption.point;
 import static java.time.Duration.ofMillis;
-import static utilities.Base.mobileDriver;
-import static utilities.Base.wait;
+import static utilities.Base.*;
 
 
 public class MobileActions  {
+
+    @Step("click on mobile element")
+    public static String ReturnElementText(MobileElement elem) {
+        wait.until(ExpectedConditions.visibilityOf(elem));
+        return elem.getText().trim();
+    }
 
     @Step("click on mobile element")
     public static void Click(MobileElement elem) {
@@ -42,31 +52,57 @@ public class MobileActions  {
             PermissionButton = PermissionButton + "[2]";
         else
             PermissionButton = PermissionButton + "[1]";
+        try {
+            Verifications_Mobile.WaitForElement(mobileDriver.findElement(By.xpath(PermissionButton)), 15);
+            mobileDriver.findElement(MobileBy.xpath(PermissionButton)).click();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        wait.until(ExpectedConditions.elementToBeClickable(mobileDriver.findElement(MobileBy.xpath(PermissionButton))));
-        mobileDriver.findElement(MobileBy.xpath(PermissionButton)).click();
     }
 
     @Step("send text to element")
     public static void SendText(MobileElement elem , String text) {
         wait.until(ExpectedConditions.visibilityOf(elem));
+        elem.sendKeys(""); //delete the content
+
         elem.sendKeys(text);
     }
 
-    @Step("airplane mode ON (Disable Connectivity")
-    public static void AirPlaneON(AndroidDriver driver) {
-        driver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build());
+    @Step("wifi ON (Disable Connectivity")
+    public static void WifiON() {
+        androidDriver.setConnection(new ConnectionStateBuilder().withWiFiEnabled().withDataEnabled().build()); // wifi on
+//TODO : CHECK CONNECTIVIITY
+        while(!androidDriver.getConnection().isWiFiEnabled()) { //wait until it's true
+            System.out.println("wifi status is :" + androidDriver.getConnection().isWiFiEnabled());
+            try {
+                System.out.println(androidDriver.getStatus());
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } //WAIT FOR Toggle to happened
     }
 
-    @Step("airplane mode OFF (Enable Connectivity")
-    public static void AirPlaneOFF(AndroidDriver driver) {
-        driver.setConnection(new ConnectionStateBuilder().withWiFiEnabled().withDataEnabled().build());
-        //adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS
 
+    @Step("wifi OFF (Enable Connectivity")
+    public static void WifiOFF() {
+
+        System.out.println(androidDriver.getStatus());
+        androidDriver.setConnection(new ConnectionStateBuilder().withWiFiDisabled().withDataDisabled().build()); //wifi off
+        while(androidDriver.getConnection().isWiFiEnabled()) { //wait until it's false
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } //WAIT FOR Toggle to happened
+
+        //adb shell am start -a android.settings.AIRPLANE_MODE_SETTINGS
     }
 
     @Step("Tap On Element")
-    public static void tap(MobileElement elem) {
+    public static void tapOnElement(MobileElement elem) {
         wait.until(ExpectedConditions.elementToBeClickable(elem));
         new TouchAction(mobileDriver).tap(tapOptions().withElement(element(elem))).perform();
     }
@@ -78,17 +114,31 @@ public class MobileActions  {
     }
 
     @Step("Tap On Element's position")
-    public static void tapOnPosition(MobileElement elem,int x , int y) {
+    public static void tapOnElementPosition(MobileElement elem,int x , int y) {
         wait.until(ExpectedConditions.elementToBeClickable(elem));
         Point p= new Point(x,y);
         new TouchAction(mobileDriver).tap(tapOptions().withElement(element(elem)).withPosition(point(x,y))).perform();
     }
+
+    @Step("Tap On Element's position")
+    public static void taoOnScreen(int x , int y) {
+        new TouchAction(mobileDriver).tap(point(x, y)).perform();
+    }
+
+
+    @Step("double Tap On Element's position")
+    public static void doubleTaoOnScreen(int x , int y) {
+        new TouchAction(mobileDriver).tap(point(x, y)).perform().waitAction(WaitOptions.waitOptions(Duration.ofMillis(100))).tap(point(x, y)).perform();
+    }
+
+
 
     @Step("longpress On Element")
     public static void longPress(MobileElement elem,int Duration_mSec) {
         wait.until(ExpectedConditions.elementToBeClickable(elem));
         new TouchAction(mobileDriver).longPress(longPressOptions().withElement(element(elem)).withDuration(ofMillis(Duration_mSec))).release().perform();
     }
+
 
     @Step("longpress On Element ios")
     public static void longPressIOS(MobileElement elem,int Duration_mSec) {
@@ -111,17 +161,27 @@ public class MobileActions  {
     }
 
     @Step("scroll until text shows")
-    public static void scroll(String text2Find) {
-        //mobileDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollIntoView(text(" + '"' + text2Find + '"' + "))");
-        //mobileDriver.findElementByAndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true).instance(0)).scrollIntoView(new UiSelector().textMatches((" + '"' + text2Find + '"' + ")).instance(0))");
+    public static void scrollToElement(String element_id) {
+        androidDriver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true).scrollIntoView(new UiSelector().resourceId(" + "\"" + element_id+ "\"" + "))"));
+
     }
 
+    @Step("scroll until text shows")
+    public static void scrollTotext(String text2Find) {
+        androidDriver.findElement(MobileBy.AndroidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true))" +
+                        ".scrollIntoView(new UiSelector().textContains(" + '"'+ text2Find + '"' + "))"));
+    }
+
+
+
     @Step("scroll until text shows on IOS")
-    public static void scroll_IOS(String text2Find) {
+    public static void scrollToText_IOS(String text2Find) {
         HashMap<String,Object> scrollObject = new HashMap<>();
         scrollObject.put("direction","down");
         scrollObject.put("name",text2Find);
-        mobileDriver.executeScript("mobile:scroll",scrollObject);
+        iosDriver.executeScript("mobile:scroll",scrollObject);
     }
 
     @Step("set slider value on IOS")

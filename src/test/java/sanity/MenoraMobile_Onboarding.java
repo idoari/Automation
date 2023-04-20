@@ -18,7 +18,7 @@ import java.util.Set;
 @Listeners(utilities.Listeners.class)
 public class MenoraMobile_Onboarding extends CommonOps
 {
-/*
+
     @BeforeClass
     public void startSession () throws IOException {
         int port = findAvailableAppiumPort();

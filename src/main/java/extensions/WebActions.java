@@ -73,7 +73,7 @@ public class WebActions extends CommonOps {
 
     @Step("download file")
     public static void downloadFileFromAPPCenter(String fileURL) throws IOException {
-       //https://install.appcenter.ms/
+        //https://install.appcenter.ms/
         //WebActions.Click("//*[@class='_23wN5TUrx _2Xp9P6six']");
         FileUtils.copyURLToFile(new URL(fileURL), new File("AUT/" + fileURL.split("/")[fileURL.split("/").length -1]));
     }

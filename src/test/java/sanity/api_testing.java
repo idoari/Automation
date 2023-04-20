@@ -11,24 +11,35 @@ import utilities.Base;
 
 public class api_testing extends Base {
 
+     static JSONObject j ;
+     static String token;
+     static String userid;
+ 
     @BeforeClass
     public   void initAPI() {
         RestAssured.baseURI = "https://demoqa.com/";
         httpRequest = RestAssured.given();
 
-        JSONObject j = new JSONObject();
+        j = new JSONObject();
         j.put("userName", "idoari");
         j.put("password", "Snakebite@10");
 
-        System.out.println(ApiActions.getBodyValues(ApiActions.post(j,"Account/v1/GenerateToken") ,"token"));
     }
 
     @Test
-    public static void t1() {
-        System.out.println(ApiActions.get("BookStore/v1/Books").prettyPrint() + "\n" + "*********");
-        //ApiActions.put("/posts/1","/posts/1","titlw","This is an example of changing text with PUT");
-        //System.out.println(ApiActions.get("/posts/1").getBody().asString() + "\n" + "*********");
+    public static void getTokenAndUserID() {
+        ApiActions.post(j,"Account/v1/Authorized").prettyPrint();
+        token = ApiActions.getBodyValues(ApiActions.post(j,"Account/v1/GenerateToken") ,"token");
+        System.out.println(token);
+        userid = ApiActions.getBodyValues(ApiActions.post(j,"Account/v1/User") ,"code");
+        System.out.println(userid);
+    }
 
+    @Test
+    public static void t2() {
+       // ApiActions.put();
 
     }
+
+
 }
