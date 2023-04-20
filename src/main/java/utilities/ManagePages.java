@@ -4,7 +4,7 @@ package utilities;
 public class ManagePages extends Base {
 
     public static void initMenoraHW() {
-        MenoraHW_intro = new pageObjects.Menora_HW.IntroScreen(mobileDriver);
+      /*  MenoraHW_intro = new pageObjects.Menora_HW.IntroScreen(mobileDriver);
         MenoraHW_permistionAsk = new pageObjects.Menora_HW.PermisionAsk(mobileDriver);
         MenoraHW_LocationReject = new pageObjects.Menora_HW.LocationReject(mobileDriver);
         MenoraHW_gotIt = new pageObjects.Menora_HW.GotItScreen(mobileDriver);
@@ -30,7 +30,7 @@ public class ManagePages extends Base {
         MenoraHW_UpdatedCredit = new pageObjects.Menora_HW.LoadPackageUpdatedCredit(mobileDriver);
         MenoraHW_LocationPopup = new pageObjects.Menora_HW.LocationPleaseAllowPopup(mobileDriver);
         MenoraHW_LocationHaveToAccept = new pageObjects.Menora_HW.LocationHaveToAccept(mobileDriver);
-
+*/
 
 
 

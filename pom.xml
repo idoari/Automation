@@ -24,29 +24,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-api</artifactId>
-            <version>3.141.59</version>
-        </dependency>
-
-
-        <dependency>
-            <groupId>io.appium</groupId>
-            <artifactId>java-client</artifactId>
-            <version>7.4.0</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.4.0</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>4.4.3</version>
         </dependency>
 
         <dependency>
@@ -55,32 +35,61 @@
             <version>2.18.1</version>
         </dependency>
 
+<!--webdriver manger - for auto download the browser driver (firefox,IE or chrome)-->
+        <!-- https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
         <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.9.9.1</version>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.3.2</version>
         </dependency>
 
-        <!--
-        <dependency>
-            <groupId>sikulix</groupId>
-            <artifactId>sikulix-api</artifactId>
-            <version>2.0.4</version>
-        </dependency>
-        -->
 
+        <!--for mobile testing  -->
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>7.4.0</version>
+        </dependency>
+
+<!--for visual testing - do action on visual element on the screen-->
+        <!-- https://mvnrepository.com/artifact/com.sikulix/sikulixapi -->
+        <dependency>
+            <groupId>com.sikulix</groupId>
+            <artifactId>sikulixapi</artifactId>
+            <version>2.0.5</version>
+        </dependency>
+
+<!--screen recorder on test fail-->
         <dependency>
             <groupId>com.github.stephenc.monte</groupId>
             <artifactId>monte-screen-recorder</artifactId>
             <version>0.7.7.0</version>
         </dependency>
 
-
+        <!--for api testing and json file managment-->
         <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>5.1.1</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/json-path -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-path</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+
+
+
+<!--end of api testing-->
 
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
         <dependency>
@@ -96,21 +105,7 @@
             <version>5.2.2</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.rest-assured/json-path -->
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>json-path</artifactId>
-            <version>5.1.1</version>
-            <scope>test</scope>
-        </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.rest-assured/json-schema-validator -->
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>json-schema-validator</artifactId>
-            <version>5.1.1</version>
-            <scope>test</scope>
-        </dependency>
 
 
         <dependency>
@@ -141,6 +136,12 @@
             <version>1.7.36</version>
         </dependency>
 
+        <!--        <dependency>-->
+        <!--            <groupId>org.apache.logging.log4j</groupId>-->
+        <!--            <artifactId>log4j-to-slf4j</artifactId>-->
+        <!--            <version>2.8.2</version>-->
+        <!--        </dependency>-->
+
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -159,6 +160,7 @@
             <version>1.7</version>
         </dependency>
 
+        <!-- for mysql -->
         <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
         <dependency>
             <groupId>mysql</groupId>
@@ -166,13 +168,17 @@
             <version>8.0.25</version>
         </dependency>
 
+<!--        running maven profiles-->
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
-            <version>3.0.0-M7</version>
+            <version>3.0.0</version>
         </dependency>
 
+
+
+        <!-- sending email-->
         <!-- https://mvnrepository.com/artifact/com.sun.mail/jakarta.mail -->
         <dependency>
             <groupId>com.sun.mail</groupId>
@@ -180,53 +186,26 @@
             <version>2.0.1</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.github.java-json-tools/json-schema-validator -->
-        <dependency>
-            <groupId>com.github.java-json-tools</groupId>
-            <artifactId>json-schema-validator</artifactId>
-            <version>2.2.14</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.rest-assured</groupId>
-            <artifactId>json-path</artifactId>
-            <version>5.1.1</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-to-slf4j</artifactId>
-            <version>2.8.2</version>
-        </dependency>
 
     </dependencies>
 
-        <repositories>
-            <!--
-           <repository><id>sikulix-atid-college</id>
-               <name>Sikulix Repo ATID</name>
-               <url>https://atidcollege.co.il/downloads/libs</url>
-           </repository>
+<!--        <repositories>-->
 
-       <repository>
-           <releases>
-               <enabled>true</enabled>
-               <updatePolicy>always</updatePolicy>
-               <checksumPolicy>fail</checksumPolicy>
-           </releases>
-           <id>Experitest.repo1</id>
-           <name>YourName</name>
-           <url>http://repo.experitest.com:8010/Maven2/</url>
-           <layout>default</layout>
-       </repository>
-            -->
-             <repository>
-                <id>jitpack.io</id>
-                <url>https://jitpack.io</url>
-            </repository>
 
-    </repositories>
+<!--       <repository>-->
+<!--           <releases>-->
+<!--               <enabled>true</enabled>-->
+<!--               <updatePolicy>always</updatePolicy>-->
+<!--               <checksumPolicy>fail</checksumPolicy>-->
+<!--           </releases>-->
+<!--           <id>Experitest.repo1</id>-->
+<!--           <name>YourName</name>-->
+<!--           <url>http://repo.experitest.com:8010/Maven2/</url>-->
+<!--           <layout>default</layout>-->
+<!--       </repository>-->
+
+
+<!--    </repositories>-->
 
 
 

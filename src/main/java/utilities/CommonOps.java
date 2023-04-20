@@ -48,7 +48,7 @@ public class CommonOps extends Base {
         //config file
         prop = new Properties();
         prop.load(new FileInputStream(System.getProperty("user.dir") + "/Configuration/config.properties" ));
-		MobileFlows.ReadAccounts(); //read from file the id and phone numbers for the accounts todo:replace with db
+		//MobileFlows.ReadAccounts(); //read from file the id and phone numbers for the accounts todo:replace with db
     }
 /*
     @AfterClass

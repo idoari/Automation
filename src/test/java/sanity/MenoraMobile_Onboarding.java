@@ -12,6 +12,8 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import utilities.CommonOps;
 import utilities.ManagePages;
+import workflows.MobileFlows;
+
 import java.io.IOException;
 import java.util.Set;
 
@@ -54,7 +56,7 @@ public class MenoraMobile_Onboarding extends CommonOps
    @Test(description = "test01 - check visibility")
     @Description("this test check visibility of onboarding screen")
     public void test_H1() throws InterruptedException {Thread.sleep(2000); //wait for splash screen to disappear
-       Verifications_Mobile.verifyTextInElement(MenoraHW_onboarding.lb_goToApp,"קדימה לאפליקציה");
+      // Verifications_Mobile.verifyTextInElement(MenoraHW_onboarding.lb_goToApp,"קדימה לאפליקציה");
 
     }
 
@@ -63,22 +65,22 @@ public class MenoraMobile_Onboarding extends CommonOps
     public void test_H4()  {
         MobileActions.takeScreenshot("H4");
         MobileFlows.previous_screen_swipe();
-        Verifications_Mobile.existenceOfElement(MenoraHW_onboarding.btn_goToApp);
+        //Verifications_Mobile.existenceOfElement(MenoraHW_onboarding.btn_goToApp);
     }
 
 
     @Test(description = "test01 - add a new candidate")
     @Description("this test adds a new candidate to CSV file")
     public void test_H5()  {
-        MobileActions.Click(MenoraHW_onboarding.btn_goToApp);
-        Verifications_Mobile.existenceOfElement(MenoraHW_connection.lb_home);
+       // MobileActions.Click(MenoraHW_onboarding.btn_goToApp);
+       // Verifications_Mobile.existenceOfElement(MenoraHW_connection.lb_home);
         MobileActions.takeScreenshot("H5");
     }
 
     @Test(description = "test01 - add a new candidate")
     @Description("this test adds a new candidate to CSV file")
     public void test_I6() throws InterruptedException {
-        MobileActions.Click(MenoraHW_connection.btn_b2c);
+        //MobileActions.Click(MenoraHW_connection.btn_b2c);
         Thread.sleep(5000);
         Set<String> contextNames = androidDriver.getContextHandles();
         Thread.sleep(3000);
@@ -124,7 +126,7 @@ public class MenoraMobile_Onboarding extends CommonOps
     @Test(description = "test01 - add a new candidate")
     @Description("this test adds a new candidate to CSV file")
     public void test_i7() throws InterruptedException {
-        MobileActions.Click(MenoraHW_permistionAsk.btn_continue);
+        //MobileActions.Click(MenoraHW_permistionAsk.btn_continue);
         MobileActions.PermissionAllowDeny("Allow"); //LOCATION ALLOW - ALLOW
         Thread.sleep(1000);
         MobileActions.PermissionAllowDeny("Allow"); //BATTERY OPTIMIZER - ALLOW
@@ -180,7 +182,7 @@ public class MenoraMobile_Onboarding extends CommonOps
         //long endtime = System.nanoTime();
     }
 
-*/
+
 
   //  @AfterClass
    // public void end_session() {

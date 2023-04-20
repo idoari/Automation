@@ -4,7 +4,6 @@ import extensions.MobileActions;
 import extensions.Verifications_Mobile;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.github.bonigarcia.wdm.managers.SeleniumServerStandaloneManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.testng.Assert;
@@ -98,7 +97,7 @@ public class MobileFlows extends Base
             System.out.println("need to recheck package title");
         }
     }
-
+/*
     public static void ReadAccounts() {
         File tFile = new File( System.getProperty("user.dir") + "/DDTFiles/accounts.txt" );
         FileReader fileReader = null;
@@ -123,7 +122,7 @@ public class MobileFlows extends Base
 
     }
 
-
+*/
 
 
 }
